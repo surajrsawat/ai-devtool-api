@@ -1,0 +1,22 @@
+{
+  "name": "@ai-devtool/ai-devtool-api",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "dependencies": {
+    "fastify": "^5.0.0",
+    "pino": "^9.5.0",
+    "zod": "^3.23.8"
+  }
+}
