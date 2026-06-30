@@ -53,9 +53,16 @@ sequenceDiagram
 
 ## Local Development
 1. npm install
-2. npm run typecheck
-3. npm run test
-4. npm run lint
+2. npm run start:dev
+3. npm run typecheck
+4. npm run test
+5. npm run lint
+
+## Runtime Notes
+- Default API local address: `http://127.0.0.1:3001`
+- Override with env vars:
+    - `PORT` (default `3001`)
+    - `HOST` (default `127.0.0.1`)
 
 ## CI/CD and PR Policy
 - Required PR checks: lint, typecheck, unit/integration tests, security scans.
