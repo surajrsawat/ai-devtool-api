@@ -1,0 +1,74 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AI DevTool API",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "responses": {
+          "200": {
+            "description": "Health response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "service": "ai-devtool-api",
+                  "version": "0.1.0",
+                  "timestamp": "2026-06-30T00:00:00.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repos/connect": {
+      "post": {
+        "tags": [
+          "repos"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "provider": "github",
+                "organization": "surajrsawat",
+                "repository": "ai-devtool-api",
+                "defaultBranch": "main"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Connected repo",
+            "content": {
+              "application/json": {
+                "example": {
+                  "connectionId": "conn_123",
+                  "provider": "github",
+                  "organization": "surajrsawat",
+                  "repository": "ai-devtool-api",
+                  "defaultBranch": "main",
+                  "status": "connected",
+                  "createdAt": "2026-06-30T00:00:00.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
