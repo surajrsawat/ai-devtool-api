@@ -4,6 +4,7 @@
   "private": false,
   "type": "module",
   "scripts": {
+    "start:dev": "tsx src/dev-server.ts",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
