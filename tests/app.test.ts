@@ -57,4 +57,56 @@ describe("api routes", () => {
     const body = response.json();
     expect(body.code).toBe("VALIDATION_ERROR");
   });
+
+  it("returns repository index status", async () => {
+    const response = await app.inject({
+      method: "GET",
+      url: "/repos/repo_123/index-status",
+    });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.json().repositoryId).toBe("repo_123");
+  });
+
+  it("returns repository search results", async () => {
+    const response = await app.inject({
+      method: "POST",
+      url: "/repos/repo_123/search",
+      payload: {
+        query: "retry",
+        topK: 3,
+      },
+    });
+
+    expect(response.statusCode).toBe(200);
+
+    const body = response.json() as { query: string; results: Array<{ path: string }> };
+    expect(body.query).toBe("retry");
+    expect(body.results.length).toBeGreaterThan(0);
+  });
+
+  it("creates and fetches review", async () => {
+    const createResponse = await app.inject({
+      method: "POST",
+      url: "/reviews",
+      payload: {
+        repositoryId: "repo_123",
+        branch: "main",
+        prompt: "Review security",
+      },
+    });
+
+    expect(createResponse.statusCode).toBe(201);
+
+    const created = createResponse.json() as { reviewId: string; status: string };
+    expect(created.status).toBe("completed");
+
+    const getResponse = await app.inject({
+      method: "GET",
+      url: `/reviews/${created.reviewId}`,
+    });
+
+    expect(getResponse.statusCode).toBe(200);
+    expect(getResponse.json().reviewId).toBe(created.reviewId);
+  });
 });
